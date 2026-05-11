@@ -1,7 +1,7 @@
-import os
 from azure.iot.device import IoTHubDeviceClient, Message
-import json, random, time
+import json, random, time, os
 
+# Day 3: Testing GitHub Actions automation
 CONNECTION_STRING = os.getenv("AZURE_IOT_HUB_CONNECTION_STRING")
 if not CONNECTION_STRING:
     raise ValueError("AZURE_IOT_HUB_CONNECTION_STRING env var not set")
@@ -19,4 +19,3 @@ while True:
     client.send_message(Message(json.dumps(payload)))
     print("sent:", payload)
     time.sleep(5)
-    
