@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: printer-telemetry
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: printer-telemetry
+  template:
+    metadata:
+      labels:
+        app: printer-telemetry
+    spec:
+      containers:
+      - name: printer-telemetry
+        image: lunaco/printer-telemetry:v1
+        imagePullPolicy: Always
+        env:
+        - name: AZURE_IOT_HUB_CONNECTION_STRING
+          valueFrom:
+            secretKeyRef:
+              name: printer-connection
+              key: connection-string
